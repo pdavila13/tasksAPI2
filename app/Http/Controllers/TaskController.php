@@ -109,6 +109,10 @@ class TaskController extends Controller
             ], 404);
         }
 
+        return Response::json([
+            'data' => $task->toArray()
+        ],200);
+
         $this->saveTask($request, $task);
     }
 
