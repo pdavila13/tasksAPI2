@@ -121,7 +121,7 @@ class TagController extends Controller
     private function transform($tag){
         return [
             'name' => $tag['name'],
-            'tran' => $tag['tran']
+            'tran' => (boolean) $tag['tran']
         ];
     }
 
