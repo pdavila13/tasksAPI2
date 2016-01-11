@@ -122,6 +122,8 @@ class TagController extends Controller
         return [
             'name' => $tag['name'],
             'tran' => (boolean) $tag['tran']
+//            'created_at' => $tag['created_at'],
+//            'updated_at' => $tag['updated_at']
         ];
     }
 

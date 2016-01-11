@@ -19,12 +19,13 @@ class TaskController extends Controller
     public function index()
     {
         // 1. No es retorna: paginacion
-        return Task::all();
+        //return Task::all();
 
         $task = Task::all();
 
         return Response::json([
-            'data' => $task->toArray()
+            'data' => $this->transformCollection($task)
+            //'data' => $task->toArray()
         ],200);
     }
 
@@ -72,7 +73,8 @@ class TaskController extends Controller
         }
 
         return Response::json([
-            'data' => $task->toArray()
+            'data' => $this->transform($task->toArray())
+            //'data' => $task->toArray()
         ],200);
     }
 
@@ -125,6 +127,19 @@ class TaskController extends Controller
     public function destroy($id)
     {
         Task::destroy($id);
+    }
+
+    public function transformCollection($task)
+    {
+        return array_map([$this, 'transform'], $task->toArray());
+    }
+
+    private function transform($task){
+        return [
+            'name' => $task['name'],
+            'priority' => (boolean) $task['priority'],
+            'done' => $task['done']
+        ];
     }
 
     /**
