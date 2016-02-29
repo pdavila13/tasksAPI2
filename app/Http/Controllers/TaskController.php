@@ -9,15 +9,13 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Response;
 
-class TaskController extends Controller
-{
+class TaskController extends Controller {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index() {
         // 1. No es retorna: paginacion
         //return Task::all();
 
@@ -34,8 +32,7 @@ class TaskController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create() {
         //
     }
 
@@ -45,8 +42,7 @@ class TaskController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
         $task = new Task();
 
         $this->saveTask($request, $task);
@@ -84,8 +80,7 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
+    public function edit($id) {
         //
     }
 
@@ -96,8 +91,7 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id) {
         //$task = Task::findOrFail($id);
 
         $task = Task::find($id);
@@ -124,13 +118,11 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function destroy($id) {
         Task::destroy($id);
     }
 
-    public function transformCollection($task)
-    {
+    public function transformCollection($task) {
         return array_map([$this, 'transform'], $task->toArray());
     }
 
@@ -146,8 +138,7 @@ class TaskController extends Controller
      * @param Request $request
      * @param $tag
      */
-    public function saveTask(Request $request, $task)
-    {
+    public function saveTask(Request $request, $task) {
         $task->name = $request->name;
         $task->priority = $request->priority;
         $task->done = $request->done;

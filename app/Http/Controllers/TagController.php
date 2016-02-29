@@ -12,30 +12,18 @@ use Response;
 
 class TagController extends Controller {
 
-    protected $tagTransform;
-
-    /**
-     * TagController constructor.
-     * @param $tagTransform
-     */
-    public function __construct($tagTransform) {
-        $this->tagTransform = $tagTransform;
-    }
-
-
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index() {
         //return Tag::all();
 
         $tag = Tag::all();
 
         return Response::json([
-            'data' => $this->tagTransform->transformCollection($tag)
+            'data' => $this->transformCollection($tag)
         ],200);
     }
 
@@ -44,8 +32,7 @@ class TagController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create() {
         //
     }
 
@@ -55,8 +42,7 @@ class TagController extends Controller {
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
         $tag = new Tag();
 
         $this->saveTag($request, $tag);
@@ -68,8 +54,7 @@ class TagController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
+    public function show($id) {
         //return $tag = Tag::findOrFail($id);
         //$tag = Tag::where('id',$id)->first();
 
@@ -85,7 +70,7 @@ class TagController extends Controller {
         }
 
         return Response::json([
-            'data' => $this->tagTransform->transform($tag->toArray())
+            'data' => $this->transform($tag->toArray())
         ],200);
     }
 
@@ -95,8 +80,7 @@ class TagController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
+    public function edit($id) {
         //
     }
 
@@ -107,9 +91,23 @@ class TagController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        $tag = Tag::findOrFail($id);
+    public function update(Request $request, $id) {
+        //$tag = Tag::findOrFail($id);
+
+        $tag = Tag::find($id);
+
+        if (!$tag) {
+            return Response::json([
+                'error' => [
+                    'message' => 'Task does not exist',
+                    'code' => 195
+                ]
+            ], 404);
+        }
+
+        return Response::json([
+            'data' => $tag->toArray()
+        ],200);
 
         $this->saveTag($request, $tag);
     }
@@ -120,17 +118,25 @@ class TagController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function destroy($id) {
         Tag::destroy($id);
+    }
+
+    public function transformCollection($tag) {
+        return array_map([$this, 'transform'], $tag->toArray());
+    }
+
+    private function transform($tag){
+        return [
+            'name' => $tag['name']
+        ];
     }
 
     /**
      * @param Request $request
      * @param $tag
      */
-    public function saveTag(Request $request, $tag)
-    {
+    public function saveTag(Request $request, $tag) {
         $tag->name = $request->name;
         $tag->save();
     }
