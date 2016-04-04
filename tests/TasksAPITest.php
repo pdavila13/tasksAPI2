@@ -80,7 +80,7 @@ class TasksAPITest extends TestCase {
      * @return void
      */
     public function testTasksCanBePostedAndSavedIntoDatabase() {
-        $data = ['name' => 'Foobar', 'done' => 1, 'priority' => 1];
+        $data = ['name' => 'Foobar', 'done' => true, 'priority' => 1];
         $this->post('/task',$data)->seeInDatabase('tasks',$data);
         $this->get('/task')->seeJsonContains($data)->seeStatusCode(200);
     }
