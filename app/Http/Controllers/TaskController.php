@@ -11,6 +11,14 @@ use Response;
 
 class TaskController extends Controller {
     /**
+     * TaskController constructor.
+     */
+    public function __construct(){
+        $this->middleware('auth:api');
+    }
+
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response

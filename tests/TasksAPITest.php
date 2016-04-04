@@ -108,4 +108,14 @@ class TasksAPITest extends TestCase {
         $this->delete('/task/' . $task->id)->notSeeInDatabase('tasks',$data);
         $this->get('/task')->dontSeeJson($data)->seeStatusCode(200);
     }
+
+
+    /**
+     * Test tasks
+     * @group failing
+     * @return void
+     */
+    public function testTasksApiToken() {
+        $this->get('task');
+    }
 }

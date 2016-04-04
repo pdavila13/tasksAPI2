@@ -11,6 +11,13 @@ use App\Http\Controllers\Controller;
 use Response;
 
 class TagController extends Controller {
+    /**
+     * TagController constructor.
+     */
+//    public function __construct() {
+//        $this->middleware('auth:api');
+//    }
+
 
     /**
      * Display a listing of the resource.
