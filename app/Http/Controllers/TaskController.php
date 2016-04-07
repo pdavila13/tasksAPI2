@@ -14,7 +14,7 @@ class TaskController extends Controller {
      * TaskController constructor.
      */
     public function __construct(){
-        $this->middleware('auth:api');
+        //$this->middleware('auth:api');
     }
 
 

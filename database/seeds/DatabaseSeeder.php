@@ -43,7 +43,7 @@ class DatabaseSeeder extends Seeder
             $tag = new Tag();
 
             $tag->name = $faker->word;
-            $tag->tran = $faker->boolean;
+            //$tag->tran = $faker->boolean;
             $tag->save();
         }
 

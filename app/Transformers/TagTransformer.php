@@ -13,7 +13,7 @@ class TagTransformer extends Transformer {
     public function transform($item){
         return [
             'name' => $item['name'],
-            'tran' => (boolean) $item['tran']
+            //'tran' => (boolean) $item['tran']
             //'created_at' => $tag['created_at'],
             //'updated_at' => $tag['updated_at']
         ];
