@@ -25,7 +25,6 @@ class TagController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        //return Tag::all();
 
         $tag = Tag::all();
 

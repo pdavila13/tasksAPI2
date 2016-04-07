@@ -33,6 +33,15 @@ class TagsAPITest extends TestCase {
     }
 
     /**
+     * Test tags Return 404 on tag not exists
+     *
+     * @return void
+     */
+    public function testTagsReturn404OnTaskNotExists() {
+        $this->get('/tag/500')->seeJson()->seeStatusCode(404);
+    }
+
+    /**
      * Test tags in database is shown by API
      *
      * @return void

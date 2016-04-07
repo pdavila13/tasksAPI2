@@ -10,6 +10,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 class TasksAPITest extends TestCase {
 
     use DatabaseMigrations;
+    use WithoutMiddleware;
 
     /**
      * Test tasks is an api then returns JSON.
@@ -117,5 +118,9 @@ class TasksAPITest extends TestCase {
      */
     public function testTasksApiToken() {
         $this->get('task');
+    }
+
+    public function test(){
+
     }
 }
